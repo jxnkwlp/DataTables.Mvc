@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+
+
+
+}
+@using Passingwind.Datatables.Mvc
+
+@model IList<Student>
+
+
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Datatables</title>
+
+        <link href="~/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+
+        <script src="~/datatables/js/jquery.js"></script>
+        <script src="~/datatables/js/jquery.dataTables.js"></script>
+
+        <script>
+
+            $(document).ready(function () {
+
+                @Html.DataTables("table2").DataTable(d => d.Ordering(true)).Columns(col=> {
+               col.Add("Name").Title("Name");
+               col.Add("Position").Title("Position");
+               col.Add("Office").Title("Office");
+               col.Add("Extn.").Title("Extn");
+               col.Add("Start date").Title("Start date");
+               col.Add("Salary").Title("Salary");
+           }).ColumnDefs(col=> {
+           col.TargetAll().ClassName("fdsfds").Render(@<text> function(data, type, row){ return data; } </text>);
+                }).Ajax(ajax => ajax.Url( Url.Content("~/ajax.txt")).RequestData(new { a="123" }))
+
+
+                @Html.DataTablesFor("fdsaf").ColumnsFor(col => { col.ModelFor(t => t[0].Id); })
+
+                });
+        </script>
+
+    </head>
+    <body>
+
+
+        <table id="table2"></table>
+
+
+    </body>
+</html>
